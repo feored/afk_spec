@@ -1,3 +1,3 @@
-from . import AfkSpec as RealAFkSpec
+from . import AfkSpecApp as RealAFkSpecApp
 
-AfkSpec = RealAFkSpec
+AfkSpecApp = RealAFkSpecApp

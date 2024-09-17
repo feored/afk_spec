@@ -2,6 +2,7 @@ import logging
 import asyncio
 
 from pyplanet.apps.config import AppConfig
+
 from pyplanet.apps.core.maniaplanet import callbacks as mp_signals
 from .views import AFKWidget
 from pyplanet.core.signals import pyplanet_start_after
@@ -10,10 +11,8 @@ from pyplanet.contrib.setting import Setting
 logger = logging.getLogger(__name__)
 
 
-class AfkSpec(AppConfig):
+class AfkSpecApp(AppConfig):
     game_dependencies = ['trackmania']
-    app_dependencies = ["core.maniaplanet", "core.trackmania"]
-    namespace = "afk_spec"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -6,7 +6,7 @@ import asyncio
 class AFKWidget(WidgetView):
     widget_x = -999
     widget_y = -999
-    template_name = 'afk/AFK.xml'
+    template_name = 'afk_spec/AFK.xml'
 
     def __init__(self, app):
         super().__init__(self)
@@ -33,5 +33,5 @@ class AFKWidget(WidgetView):
         #print(x)
         await self.app.instance.gbx.multicall(
 			self.app.instance.gbx('ForceSpectator', player.login, 3),
-			self.app.instance.chat('$fff {}$z$s$fff is now set away from keyboard due to $z$s$f50inactivity.'.format(player.nickname))
+			self.app.instance.chat('$fff {}$z$s$fa0 has been moved to spectator due to inactivity.'.format(player.nickname))
 		)

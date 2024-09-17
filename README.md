@@ -5,7 +5,15 @@ PyPlanet plugin to detect AFK players and move them into spectator mode.
 This plugin works by repeatedly querying the player's inputs and checking if the player is currently steering, braking or pressing the gas pedal.
 If the player is found not to be pressing any inputs for a configurable period of time, they are considered AFK and moved to spectator.
 
-Configurable settings:
+### Installation
+
+    python -m pip install --upgrade pyplanet-afk_spec
+
+Then open `settings/apps.py` with a text editor and append to the list in 'default':
+
+    'feor.afk_spec'
+
+### Configuration
 
 - AFK Timeout: Duration players can stay inactive until they are declared AFK, in seconds. [Default: 120]
 

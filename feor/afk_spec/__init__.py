@@ -19,22 +19,22 @@ class AfkSpecApp(AppConfig):
         self.widget = AFKWidget(self)
         self.setting_afk_timeout = Setting(
             'afk_timeout', 'AFK Timeout', Setting.CAT_BEHAVIOUR, type=int,
-            description='Duration players can stay inactive until they are declared AFK, in seconds. [Default: 120]',
+            description='Duration players can stay inactive until they are declared AFK, in seconds.',
             default=120
         )
         self.setting_afk_timeout_frequence_check = Setting(
             'afk_timeout_frequence_check', 'AFK Check Frequence', Setting.CAT_BEHAVIOUR, type=int,
-            description=' Time to wait before checking again whether a player is AFK, in seconds. [Default: 10]',
+            description=' Time to wait before checking again whether a player is AFK, in seconds.',
             default=10)
         
         self.setting_afk_timeout_sleep_delay = Setting(
             'afk_timeout_sleep_delay', 'AFK Delay', Setting.CAT_BEHAVIOUR, type=int,
-            description="Time to wait before querying a player's inputs again, in ms. Lower values may impact performance. [Default: 1000]",
+            description="Time to wait before querying a player's inputs again, in ms. Lower values may impact performance.",
             default=1000)
         
         self.setting_afk_grace_period = Setting(
             'afk_grace_period', 'AFK Grace Period', Setting.CAT_BEHAVIOUR, type=int,
-            description='Time to wait before checking again whether a player is AFK again if they have been confirmed not to be AFK, in seconds. [Default: 30]',
+            description='Time to wait before checking again whether a player is AFK again if they have been confirmed not to be AFK, in seconds.',
             default=30)
         
     async def on_start(self):

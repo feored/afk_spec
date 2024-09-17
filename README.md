@@ -7,7 +7,7 @@ If the player is found not to be pressing any inputs for a configurable period o
 
 ### Installation
 
-    python -m pip install --upgrade pyplanet-afk_spec
+    python -m pip install --upgrade pyplanet-afk-spec
 
 Then open `settings/apps.py` with a text editor and append to the list in 'default':
 

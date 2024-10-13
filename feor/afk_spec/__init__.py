@@ -45,6 +45,12 @@ class AfkSpecApp(AppConfig):
             default='{nickname}$z has been moved to spectator due to inactivity.'
         )
         
+        self.setting_rejoin_button_display = Setting(
+            'rejoin_button_display', 'Display Rejoin Button', Setting.CAT_DESIGN, type=bool,
+            description='If this setting is enabled, a button will be displayed to allow players to rejoin the game when they are in spectator mode.',
+            default=True
+        )
+        
         
         
     async def on_start(self):
@@ -59,6 +65,7 @@ class AfkSpecApp(AppConfig):
         await self.context.setting.register(self.setting_afk_timeout_wait)
         await self.context.setting.register(self.setting_afk_message_display)
         await self.context.setting.register(self.setting_afk_message)
+        await self.context.setting.register(self.setting_rejoin_button_display)
         
     async def handle_player_info_changed(self, player_login, is_spectator, **kwargs):
         await self.widget.refresh(player_login)

@@ -22,9 +22,11 @@ class AFKWidget(WidgetView):
         self.afk_timeout = await self.app.setting_afk_timeout.get_value()
         self.afk_timeout_check_frequency = await self.app.setting_afk_timeout_check_frequency.get_value()
         self.afk_timeout_wait = await self.app.setting_afk_timeout_wait.get_value()
+        self.rejoin_button_display = await self.app.setting_rejoin_button_display.get_value()
         context.update({'afktimeout': self.afk_timeout,
                         'afktimeoutcheckfrequency': self.afk_timeout_check_frequency,
                         'afktimeoutwait': self.afk_timeout_wait,
+                        'rejoinbuttondisplay': self.rejoin_button_display
                         })
         return context
     

@@ -5,6 +5,8 @@ PyPlanet plugin to detect AFK players and move them into spectator mode.
 This plugin works by repeatedly querying the player's inputs and checking if the player is currently steering, braking or pressing the gas pedal.
 If the player is found not to be pressing any inputs for a (configurable) period of time, they are considered AFK and moved to spectator.
 
+The plugin also lets you adda a button to rejoin the game for new players who may be confused with the spectator mode.
+
 ### Installation
 
     python -m pip install --upgrade pyplanet-afk-spec
@@ -25,8 +27,15 @@ Then open `settings/apps.py` with a text editor and append to the list in 'defau
 
 - AFK Message: Message to display when a player is moved to spectator. Use `{nickname}` to insert the player's nickname. [Default: `{nickname}$z$aaa has been moved to spectator due to inactivity.`]
 
+- Display Rejoin Button: If this setting is enabled, players in spectator mode will see a "Rejoin Game" button at the center of the screen.
+
 
 ### Changelog
+
+0.7.0
+
+- Added a rejoin button that displays for players in spectator mode
+- Added a setting to disable the rejoin button
 
 0.6.0
 

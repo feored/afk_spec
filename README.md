@@ -25,7 +25,7 @@ Then open `settings/apps.py` with a text editor and append to the list in 'defau
 
 - Display AFK Message: If this setting is enabled, a message will be displayed when a player is moved to spectator. [Default: True]
 
-- AFK Message: Message to display when a player is moved to spectator. Use `{nickname}` to insert the player's nickname. [Default: `{nickname}$z$aaa has been moved to spectator due to inactivity.`]
+- AFK Message: Message to display when a player is moved to spectator. Use `{nickname}` to insert the player's nickname. [Default: `{nickname}$z has been moved to spectator due to inactivity.`]
 
 - Display Rejoin Button: If this setting is enabled, players in spectator mode will see a "Rejoin Game" button at the center of the screen.
 

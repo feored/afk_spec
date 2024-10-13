@@ -14,24 +14,21 @@ class AFKWidget(WidgetView):
         self.manager = app.context.ui
         self.id = 'pyplanet__AFK__Handling'
         self.subscribe("Player_AFK", self.handle_player_afk)
+        
     
     async def get_context_data(self):
         context = await super().get_context_data()
         self.afk_timeout = await self.app.setting_afk_timeout.get_value()
-        self.afk_timeout_frequence_check = await self.app.setting_afk_timeout_frequence_check.get_value()
-        self.afk_timeout_sleep_delay = await self.app.setting_afk_timeout_sleep_delay.get_value()
-        self.afk_grace_period = await self.app.setting_afk_grace_period.get_value()
+        self.afk_timeout_check_frequency = await self.app.setting_afk_timeout_check_frequency.get_value()
+        self.afk_timeout_wait = await self.app.setting_afk_timeout_wait.get_value()
         context.update({'afktimeout': self.afk_timeout,
-                        'afktimeoutfrequencecheck': self.afk_timeout_frequence_check,
-                        'afktimeoutsleepdelay': self.afk_timeout_sleep_delay,
-                        'afkgraceperiod': self.afk_grace_period
+                        'afktimeoutcheckfrequency': self.afk_timeout_check_frequency,
+                        'afktimeoutwait': self.afk_timeout_wait,
                         })
         return context
     
     async def handle_player_afk(self, player, action, values, *args, **kwargs):
-        #x = datetime.datetime.now()
-        #print(x)
-        await self.app.instance.gbx.multicall(
-			self.app.instance.gbx('ForceSpectator', player.login, 3),
-			self.app.instance.chat('$fff {}$z$s$fa0 has been moved to spectator due to inactivity.'.format(player.nickname))
-		)
+        await self.app.instance.gbx('ForceSpectator', player.login, 3)
+        afk_message = await self.app.setting_afk_message.get_value()
+        if await self.app.setting_afk_message_display.get_value():
+            await self.app.instance.chat(afk_message.format(nickname=player.nickname))

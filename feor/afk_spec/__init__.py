@@ -18,24 +18,34 @@ class AfkSpecApp(AppConfig):
         super().__init__(*args, **kwargs)
         self.widget = AFKWidget(self)
         self.setting_afk_timeout = Setting(
-            'afk_timeout', 'AFK Timeout', Setting.CAT_BEHAVIOUR, type=int,
+            'afk_timeout', 'AFK Duration Allowed', Setting.CAT_BEHAVIOUR, type=int,
             description='Duration players can stay inactive until they are declared AFK, in seconds.',
             default=120
         )
-        self.setting_afk_timeout_frequence_check = Setting(
-            'afk_timeout_frequence_check', 'AFK Check Frequence', Setting.CAT_BEHAVIOUR, type=int,
-            description=' Time to wait before checking again whether a player is AFK, in seconds.',
-            default=10)
         
-        self.setting_afk_timeout_sleep_delay = Setting(
-            'afk_timeout_sleep_delay', 'AFK Delay', Setting.CAT_BEHAVIOUR, type=int,
-            description="Time to wait before querying a player's inputs again, in ms. Lower values may impact performance.",
+        self.setting_afk_timeout_check_frequency = Setting(
+            'afk_timeout_check_frequency', 'AFK Check Frequency', Setting.CAT_BEHAVIOUR, type=int,
+            description="Time to wait before querying a player's inputs again, in ms. Lower values are more precise but may impact performance.",
             default=1000)
         
-        self.setting_afk_grace_period = Setting(
-            'afk_grace_period', 'AFK Grace Period', Setting.CAT_BEHAVIOUR, type=int,
-            description='Time to wait before checking again whether a player is AFK again if they have been confirmed not to be AFK, in seconds.',
-            default=30)
+        self.setting_afk_timeout_wait = Setting(
+            'afk_timeout_wait', 'Time between AFK checks', Setting.CAT_BEHAVIOUR, type=int,
+            description='Extra time to wait before checking again whether a player is AFK, in seconds.',
+            default=10)
+        
+        self.setting_afk_message_display = Setting(
+            'afk_message_display', 'Display AFK Message', Setting.CAT_BEHAVIOUR, type=bool,
+            description='If this setting is enabled, a message will be displayed when a player is moved to spectator.',
+            default=True
+        )
+
+        self.setting_afk_message = Setting(
+            'afk_message', 'AFK Message', Setting.CAT_DESIGN, type=str,
+            description='Message to display when a player is moved to spectator. Use \'{nickname}\' to insert the player\'s nickname.',
+            default='{nickname}$z$aaa has been moved to spectator due to inactivity.'
+        )
+        
+        
         
     async def on_start(self):
         self.context.signals.listen(mp_signals.player.player_connect, self.player_connect)
@@ -44,9 +54,10 @@ class AfkSpecApp(AppConfig):
         
         # Register settings
         await self.context.setting.register(self.setting_afk_timeout)
-        await self.context.setting.register(self.setting_afk_timeout_frequence_check)
-        await self.context.setting.register(self.setting_afk_timeout_sleep_delay)
-        await self.context.setting.register(self.setting_afk_grace_period)
+        await self.context.setting.register(self.setting_afk_timeout_check_frequency)
+        await self.context.setting.register(self.setting_afk_timeout_wait)
+        await self.context.setting.register(self.setting_afk_message_display)
+        await self.context.setting.register(self.setting_afk_message)
 
     async def player_connect(self, player, **kwargs):
         await self.widget.display(player)

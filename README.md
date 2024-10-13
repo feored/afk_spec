@@ -3,7 +3,7 @@
 PyPlanet plugin to detect AFK players and move them into spectator mode.
 
 This plugin works by repeatedly querying the player's inputs and checking if the player is currently steering, braking or pressing the gas pedal.
-If the player is found not to be pressing any inputs for a configurable period of time, they are considered AFK and moved to spectator.
+If the player is found not to be pressing any inputs for a (configurable) period of time, they are considered AFK and moved to spectator.
 
 ### Installation
 
@@ -15,10 +15,22 @@ Then open `settings/apps.py` with a text editor and append to the list in 'defau
 
 ### Configuration
 
-- AFK Timeout: Duration players can stay inactive until they are declared AFK, in seconds. [Default: 120]
+- AFK Duration Allowed: Duration players can stay inactive until they are declared AFK, in seconds. [Default: 120]
 
-- AFk Check Frequency: Time to wait before checking again whether a player is AFK, in seconds. [Default: 10]
+- AFK Check Frequency: Time to wait before querying a player's inputs again, in ms. Lower values may impact performance. [Default: 1000]
 
-- Afk Grace Period: Time to wait before checking again whether a player is AFK again if they have been confirmed not to be AFK, in seconds. [Default: 30]
+- AFK Wait: Time to wait before checking again whether a player is AFK, in seconds. [Default: 10]
 
-- AFK Delay: Time to wait before querying a player's inputs again, in ms. Lower values may impact performance. [Default: 1000]
+- Display AFK Message: If this setting is enabled, a message will be displayed when a player is moved to spectator. [Default: True]
+
+- AFK Message: Message to display when a player is moved to spectator. Use `{nickname}` to insert the player's nickname. [Default: `{nickname}$z$aaa has been moved to spectator due to inactivity.`]
+
+
+### Changelog
+
+0.6.0
+
+- Removed Grace Period/Timeout Delay settings in favor of a single AFK Wait setting
+- Added Display AFK Message setting
+- Added AFK Message setting
+- Refactored AFK checking code and removed some checks (PendingEvents, UISequence)

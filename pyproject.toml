@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyplanet-afk_spec"
-version = "0.5.3"
+version = "0.6.0"
 authors = [{ name = "feor" }]
 description = "A Pyplanet server controller plugin to automatically move players to spectator mode if they are AFK."
 readme = "readme.md"

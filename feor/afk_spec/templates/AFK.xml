@@ -2,3 +2,10 @@
 {% block maniascript %}
   <script><!--{% include 'afk_spec/AFK.Script.Txt' %}--></script>
 {% endblock %}
+
+{% block content %}
+  {% if is_spec %}
+    <quad pos="-18 0" z-index="0" size="36 6" bgcolor="00000060"/>
+    <label pos="0 -3" z-index="2" textfont="RajdhaniMono" size="36 6" textsize="2.0" textcolor="FFE8E8FF" text="Rejoin Game" halign="center" valign="center" action="{{ id }}__Player_Rejoin" scriptevents="1" focusareacolor1="9EFF9300" />
+  {% endif %}
+{% endblock %}

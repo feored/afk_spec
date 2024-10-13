@@ -42,7 +42,7 @@ class AfkSpecApp(AppConfig):
         self.setting_afk_message = Setting(
             'afk_message', 'AFK Message', Setting.CAT_DESIGN, type=str,
             description='Message to display when a player is moved to spectator. Use \'{nickname}\' to insert the player\'s nickname.',
-            default='{nickname}$z$aaa has been moved to spectator due to inactivity.'
+            default='{nickname}$z has been moved to spectator due to inactivity.'
         )
         
         
@@ -51,6 +51,7 @@ class AfkSpecApp(AppConfig):
         self.context.signals.listen(mp_signals.player.player_connect, self.player_connect)
         self.context.signals.listen(mp_signals.map.map_begin, self.map_start)
         self.context.signals.listen(pyplanet_start_after, self.on_after_start)
+        self.context.signals.listen(mp_signals.player.player_info_changed, self.handle_player_info_changed)
         
         # Register settings
         await self.context.setting.register(self.setting_afk_timeout)
@@ -58,7 +59,10 @@ class AfkSpecApp(AppConfig):
         await self.context.setting.register(self.setting_afk_timeout_wait)
         await self.context.setting.register(self.setting_afk_message_display)
         await self.context.setting.register(self.setting_afk_message)
-
+        
+    async def handle_player_info_changed(self, player_login, is_spectator, **kwargs):
+        await self.widget.refresh(player_login)
+        
     async def player_connect(self, player, **kwargs):
         await self.widget.display(player)
 

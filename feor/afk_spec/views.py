@@ -1,11 +1,11 @@
-import datetime
 from pyplanet.views.generics.widget import WidgetView
 import asyncio
 
 
 class AFKWidget(WidgetView):
-    widget_x = -999
-    widget_y = -999
+    widget_x = 0
+    widget_y = 70
+    z_index = 130
     template_name = 'afk_spec/AFK.xml'
 
     def __init__(self, app):
@@ -14,6 +14,7 @@ class AFKWidget(WidgetView):
         self.manager = app.context.ui
         self.id = 'pyplanet__AFK__Handling'
         self.subscribe("Player_AFK", self.handle_player_afk)
+        self.subscribe("Player_Rejoin", self.action_player_rejoin)
         
     
     async def get_context_data(self):
@@ -32,3 +33,15 @@ class AFKWidget(WidgetView):
         afk_message = await self.app.setting_afk_message.get_value()
         if await self.app.setting_afk_message_display.get_value():
             await self.app.instance.chat(afk_message.format(nickname=player.nickname))
+            
+    async def action_player_rejoin(self, player, action, values, *args, **kwargs):
+        print("Player rejoin")
+        await self.app.instance.gbx('ForceSpectator', player.login, 2)
+        await self.app.instance.gbx('ForceSpectator', player.login, 0)
+
+    async def get_per_player_data(self, login):
+        context = await super().get_per_player_data(login)
+        player = await self.app.instance.player_manager.get_player(login)
+        context["is_spec"] = player.flow.is_spectator
+
+        return context

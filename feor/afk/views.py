@@ -6,7 +6,7 @@ class AFKWidget(WidgetView):
     widget_x = 0
     widget_y = 50
     z_index = 130
-    template_name = 'afk_spec/AFK.xml'
+    template_name = 'afk/AFK.xml'
 
     def __init__(self, app):
         super().__init__(self)

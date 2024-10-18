@@ -1,4 +1,4 @@
-# afk_spec
+# afk
 
 PyPlanet plugin to detect AFK players and move them into spectator mode.
 
@@ -13,7 +13,7 @@ The plugin also lets you adda a button to rejoin the game for new players who ma
 
 Then open `settings/apps.py` with a text editor and append to the list in 'default':
 
-    'feor.afk_spec'
+    'feor.afk'
 
 ### Configuration
 

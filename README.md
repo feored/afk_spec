@@ -32,6 +32,10 @@ Then open `settings/apps.py` with a text editor and append to the list in 'defau
 
 ### Changelog
 
+0.7.1
+
+- Moved position of rejoin button and added icon
+
 0.7.0
 
 - Added a rejoin button that displays for players in spectator mode

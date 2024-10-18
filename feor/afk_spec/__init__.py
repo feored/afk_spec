@@ -42,7 +42,7 @@ class AfkSpecApp(AppConfig):
         self.setting_afk_message = Setting(
             'afk_message', 'AFK Message', Setting.CAT_DESIGN, type=str,
             description='Message to display when a player is moved to spectator. Use \'{nickname}\' to insert the player\'s nickname.',
-            default='{nickname}$z has been moved to spectator due to inactivity.'
+            default='{nickname}$z$s$fff has been moved to spectator due to inactivity.'
         )
         
         self.setting_rejoin_button_display = Setting(

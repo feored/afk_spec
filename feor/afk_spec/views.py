@@ -4,7 +4,7 @@ import asyncio
 
 class AFKWidget(WidgetView):
     widget_x = 0
-    widget_y = 70
+    widget_y = 50
     z_index = 130
     template_name = 'afk_spec/AFK.xml'
 
